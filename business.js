@@ -11,6 +11,7 @@ class Npc {
     this.stuffs.push(stuff)
   }
 
+  // throw
   dropStuffById(stuffId) {
     const index = this.stuffs.findIndex(s => s.id === stuffId)
     if (index === -1) return null
@@ -20,7 +21,7 @@ class Npc {
 }
 
 class Stuff {
-  constructor(kind, variant, price) {
+  constructor(kind, variant) {
     this.id = randId()
     this.kind = kind
     this.variant = variant
@@ -35,7 +36,7 @@ class Market {
   }
 
   addOffer(ownerId, stuffId, price) {
-    const offer = { id: randId(), ownerId, stuffId, price }
+    const offer = { id: randId(), ownerId, stuffId, price } // price to cost
     this.offers.push(offer)
   }
 
@@ -61,3 +62,21 @@ class Market {
     return true
   }
 }
+
+const stuffA = new Stuff('electronic', 'laptop')
+const stuffB = new Stuff('electronic', 'smartphone')
+
+const npc1 = new Npc(1000)
+const npc2 = new Npc(1000)
+
+const market = new Market([npc1, npc2])
+npc1.addStuff(stuffA)
+
+market.addOffer(npc1.id, stuffA.id, 600)
+console.log(market.offers)
+
+market.dealByOfferId(market.offers[0].id, npc2)
+console.log(market.offers)
+console.log(npc2.stuffs)
+
+// a b c d
