@@ -1,5 +1,8 @@
 const randId = () => crypto.randomUUID().split('-').at(1)
 
+// console.log('>>', randId.name)
+// console.log('>>', (() => crypto.randomUUID().split('-').at(1)).name)
+
 class Npc {
   constructor(money) {
     this.id = randId()
@@ -14,7 +17,7 @@ class Npc {
   // throw
   dropStuffById(stuffId) {
     const index = this.stuffs.findIndex(s => s.id === stuffId)
-    if (index === -1) return null
+    if (index === -1) return null // early return
 
     return this.stuffs.splice(index, 1)[0]
   }
@@ -23,7 +26,7 @@ class Npc {
 class Stuff {
   constructor(kind, variant) {
     this.id = randId()
-    this.kind = kind
+    this.kind = kind // оператор доступа (точечная нотация) [dot notation]
     this.variant = variant
   }
 }
@@ -80,6 +83,8 @@ const npc3 = new Npc(150000)
 
 const market = new Market([npc1, npc2, npc3])
 npc1.addStuff(stuffA)
+npc1.addStuff(stuffA)
+npc2.addStuff(stuffA)
 npc3.addStuff(stuffD)
 npc2.addStuff(stuffE)
 
