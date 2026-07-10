@@ -23,6 +23,7 @@ const stuffs = [
 
 class Character {
   constructor(nickname, money) {
+    this.id = randId()
     this.nickname = nickname
     this.money = money
     this.stuffs = []
@@ -53,7 +54,9 @@ class Market {
     return this.offers
   }
 
-  showAvailableOffers() {}
+  showAvailableOffers() {
+    return this.offers.filter(o => o.cost <= this.currentCharacter.money)
+  }
 
   buyOfferById(id) {
     if (!this.currentCharacter) {
@@ -71,7 +74,7 @@ class Market {
     this.offers.push(offer)
   }
 
-  findOfferById(offerId) {
+  getOfferById(offerId) {
     const offerIndex = this.offers.findIndex(o => o.id === offerId)
     if (offerIndex === -1) return false
     const offer = this.offers[offerIndex]
@@ -80,9 +83,9 @@ class Market {
 
   // низкоуровневый метод
   dealByOfferId(offerId, buyer) {
-    const offer = this.findOfferById(offerId)
+    const offer = this.getOfferById(offerId)
     if (!offer) return false
-    const seller = findCharacterById(offer.ownerId)
+    const seller = getCharacterById(offer.ownerId)
     if (!seller) return false
     if (buyer.money < offer.cost) return false
     const stuff = seller.dropStuffById(offer.stuffId)
@@ -90,13 +93,13 @@ class Market {
     buyer.money -= offer.cost
     seller.money += offer.cost
     buyer.addStuff(stuff)
-    this.offers.splice(offerIndex, 1)
+    this.offers = this.offers.filter(o => o.id !== offer.id)
     return true
   }
 }
 
-const characters = [new Character('Rembo', 900), new Character('npc', 9000)]
-function findCharacterById(id) {
+const characters = [new Character('Rembo', 101), new Character('npc', 9000)]
+function getCharacterById(id) {
   return characters.find(n => n.id === id)
 }
 
@@ -106,4 +109,15 @@ const market = new Market()
 
 npc.addStuff(stuffs[0])
 
+market.addOffer(npc.id, stuffs[0].id, 100)
+// console.log(market.showAllOffers())
+
 market.enter(player)
+console.log(market.showAvailableOffers())
+
+const status = market.buyOfferById(market.showAllOffers()[0].id)
+console.log('status: ', status)
+console.log(market.showAllOffers())
+
+// console.log(npc)
+// console.log(player)
