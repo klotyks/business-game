@@ -50,15 +50,16 @@ class Market {
   }
 
   showAllOffers() {
-    //
+    return this.offers
   }
 
-  showAvailableOffers() {
-    //
-  }
+  showAvailableOffers() {}
 
   buyOfferById(id) {
-    //
+    if (!this.currentCharacter) {
+      return false
+    }
+    return this.dealByOfferId(id, this.currentCharacter)
   }
 
   leave() {
