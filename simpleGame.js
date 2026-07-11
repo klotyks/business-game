@@ -108,6 +108,8 @@ const npc = characters[1]
 const market = new Market()
 
 npc.addStuff(stuffs[0])
+npc.addStuff(new Stuff('electronic', 'laptop'))
+npc.addStuff(new Stuff('electronic', 'smartphone'))
 
 market.addOffer(npc.id, stuffs[0].id, 100)
 // console.log(market.showAllOffers())
@@ -121,3 +123,8 @@ console.log(market.showAllOffers())
 
 // console.log(npc)
 // console.log(player)
+
+// теперь купленный ноутбук продаём подороже. наценку себе в карман
+// размещаем офер с тем же ноутбуком и указываем стоимость, какую захотим
+// нпц выкупает этот ноутбук
+// а потом автоматически настроим нпц чтоб он размещал оферы и выкупал оферы
