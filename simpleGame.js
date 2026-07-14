@@ -38,6 +38,13 @@ class Character {
     if (index === -1) return null
     return this.stuffs.splice(index, 1)[0]
   }
+
+  // sellStuff(market, stuffId, cost) {
+  //   if (!this.stuffId) {
+  //     return false
+  //   }
+  //   return market.addOffer(this.id, stuffId, cost)
+  // }
 }
 
 class Market {
@@ -122,9 +129,11 @@ console.log('status: ', status)
 console.log(market.showAllOffers())
 
 // console.log(npc)
-// console.log(player)
+console.log(player.stuffs)
 
 // теперь купленный ноутбук продаём подороже. наценку себе в карман
 // размещаем офер с тем же ноутбуком и указываем стоимость, какую захотим
 // нпц выкупает этот ноутбук
 // а потом автоматически настроим нпц чтоб он размещал оферы и выкупал оферы
+market.addOffer(player.id, stuffs[0].id, 159)
+// console.log(player.stuffs)
