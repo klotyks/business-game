@@ -39,3 +39,9 @@
 <!--  -->
 
 упрощение в том что будет только 1 нпц
+
+objects:
+stuff
+character
+market
+offer
