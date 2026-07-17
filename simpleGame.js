@@ -38,13 +38,6 @@ class Character {
     if (index === -1) return null
     return this.stuffs.splice(index, 1)[0]
   }
-
-  // sellStuff(market, stuffId, cost) {
-  //   if (!this.stuffId) {
-  //     return false
-  //   }
-  //   return market.addOffer(this.id, stuffId, cost)
-  // }
 }
 
 class Market {
@@ -152,42 +145,58 @@ function getCharacterById(id) {
 //////////////
 //The game is played here by players:
 
+// const characters = [new Character('Rembo', 101), new Character('npc', 9000)]
+// const player = characters[0]
+// const npc = characters[1]
+// const market = new Market()
+
+// console.log('>', player.stuffs)
+
+// market.enter(player)
+// console.log(market.showAllOffers())
+// console.log(market.showAvailableOffers())
+
+// npc.addStuff(new Stuff('electronic', 'laptop'))
+// npc.addStuff(new Stuff('electronic', 'smartphone'))
+// market.addOffer(npc.id, npc.stuffs[1].id, 200)
+// market.addOffer(npc.id, npc.stuffs[0].id, 100)
+
+// console.log(market.showAllOffers())
+// console.log(market.showAvailableOffers())
+
+// console.log('>', player.stuffs)
+
+// const playerBoughtStuff = market.buyOfferByOfferId(
+//   market.showAvailableOffers()[0].id,
+// )
+
+// console.log('>', player.stuffs)
+
+// const leaveTheMarket = market.leave(player)
+
+//////////////////
+
 const characters = [new Character('Rembo', 101), new Character('npc', 9000)]
 const player = characters[0]
 const npc = characters[1]
 const market = new Market()
 
-console.log('>', player.stuffs)
+console.log(player.stuffs)
 
 market.enter(player)
-console.log(market.showAllOffers())
-console.log(market.showAvailableOffers())
+player.addStuff(new Stuff('electronic', 'smartphone'))
+market.addOffer(player.id, player.stuffs[0].id, 228)
+console.log(player.stuffs)
+market.leave(player)
 
-npc.addStuff(new Stuff('electronic', 'laptop'))
-npc.addStuff(new Stuff('electronic', 'smartphone'))
-market.addOffer(npc.id, npc.stuffs[1].id, 200)
-market.addOffer(npc.id, npc.stuffs[0].id, 100)
-
-console.log(market.showAllOffers())
-console.log(market.showAvailableOffers())
-
-console.log('>', player.stuffs)
-
-const playerBoughtStuff = market.buyOfferByOfferId(
+market.enter(npc)
+console.log(player.money)
+const npcBoughtStuff = market.buyOfferByOfferId(
   market.showAvailableOffers()[0].id,
 )
+market.leave(npc)
 
-console.log('>', player.stuffs)
-
-const leaveTheMarket = market.leave(player)
-
-//////////////////
-
-// const characters = [new Character('Rembo', 101), new Character('npc', 9000)]
-// const player = characters[0]
-// const npc = characters[1]
-
-// const enterTheMarket = market.enter(player)
-// const playerMakeOffer = market.addOffer(player.id, stuffs[0].id, 100
-
-// const leaveTheMarket = market.leave(player)
+market.enter(player)
+market.leave(player)
+console.log(player.money)
+console.log(player.stuffs)
